@@ -1,0 +1,9 @@
+<style type="text/css">
+        body{ font-family: monospace;}
+        a{ text-decoration: none; color: gray; text-transform: uppercase;}
+        a:hover{background-color: rgb(53, 165, 38); color: azure;}
+        ul{ list-style: none; }
+        ul li ul {visibility: hidden; display: none; position: absolute;}
+        ul li:hover > ul, ul li ul:hover{visibility: visible; display: block;}
+        li{display: block; float: left; position: relative; padding-left: 5%;}
+      </style>
