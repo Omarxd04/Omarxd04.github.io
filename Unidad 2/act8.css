@@ -50,12 +50,12 @@
     font-size: 60px;
     color: black;
 }
-.front{background-color: yellow; transform: translateZ(50px);}
-.back{background-color: aquamarine; transform: rotateY(180deg) translateZ(50px);}
-.left{background-color: blueviolet; transform: rotateY(-90deg) translateZ(50px);}
-.right{background-color: crimson; transform: rotateY(90deg) translateZ(50px);}
-.top{ background-color: darkslateblue; transform: rotateX(90deg) translateZ(50px);}
-.botton{background-color: dimgray; transform: rotateX(-90deg) translateZ(50px);}
+.front{background-color: rgba(247, 247, 7, 0.7); transform: translateZ(50px);}
+.back{background-color: rgba(127, 255, 212, 0.7); transform: rotateY(180deg) translateZ(50px);}
+.left{background-color: rgba(138, 43, 226, 0.7); transform: rotateY(-90deg) translateZ(50px);}
+.right{background-color: rgba(220, 20, 60, 0.7); transform: rotateY(90deg) translateZ(50px);}
+.top{ background-color: rgba(72, 61, 139, 0.7); transform: rotateX(90deg) translateZ(50px);}
+.botton{background-color: rgba(105, 105, 105, 0.7); transform: rotateX(-90deg) translateZ(50px);}
 
 .barraProgreso{
     height: 25px; width: 775px; background-color: gray;
