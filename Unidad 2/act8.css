@@ -69,5 +69,26 @@
     33%{background-color: crimson; width: 250px;}
     60%{background-color: green; width: 500px;}
     99%{background-color: black; width: 750px;}
-
+}
+.rainbow{
+    width: 100px; height: 100px; color: white;
+    border: 2px dashed black;
+    animation-name: rgb; animation-duration: 2.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.arcoiris{
+    width: 100px; height: 100px; color: white;
+    border: 2px dashed black;
+    animation-name: rgb; animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+@keyframes rgb{
+0%{background-color: green;}
+16%{background-color: yellow;}
+33%{background-color: orange;}
+50%{background-color: red;}
+67%{background-color: purple;}
+82%{background-color: blue;}
+100%{background-color: green;}
 }
