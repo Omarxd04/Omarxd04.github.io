@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Unidad 3 | Actividad 05</title>
+  <link rel="icon" type="image/x-icon" href="../Imagenes/faviconT.ico">
+  <meta charset="utf-8">
+  <meta name="Autor" content="Beltran Almendarez Omar Osvaldo">
+  <meta name="Fecha" content="">
+  <meta name="Descripción" content="Formulario">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <script>
+    function revisaDatos() {
+      let varCadena = "Resumen del formulario:\n";
+      let varForm = document.forms["frmRegistro"];
+      let varNombre = varForm.elements["txtNombre"]; varCadena += "\n - Nombre de usuario: " + varNombre.value;
+      let varClave = varForm.elements["passClave"]; varCadena += "\n - Contraseña: " + varClave.value;
+      let varTelefono = varForm.elements["txtTelefono"]; varCadena += "\n - Teléfono: 52+ " + varTelefono.value;
+      let varCorreo = varForm.elements["txtCorreo"]; varCadena += "\n - Correo: " + varCorreo.value + "@upslp.edu.mx";
+      let varMensaje = varForm.elements["txtMensaje"]; varCadena += "\n - Mensaje: " + varMensaje.value;
+      alert(varCadena);
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Unidad 3 | Actividad 05 :: Tema (Formulario)</h1>
+  <form onsubmit="revisaDatos()" class="form-horizontal" name="frmRegistro" action="#" method="post">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Registro de Usuario</legend>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="txtNombre">Nombre de usuario</label>
+        <div class="col-md-6">
+          <input id="txtNombre" name="txtNombre" type="text" placeholder="José Díaz García" class="form-control input-md" required="">
+          <span class="help-block">Escribe tu nombre completo</span>
+        </div>
+      </div>
+
+      <!-- Password input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="passClave">Contraseña</label>
+        <div class="col-md-6">
+          <input id="passClave" name="passClave" type="password" placeholder="" class="form-control input-md" required="">
+          <span class="help-block">Debe tener al menos 8 símbolos (únicamente letras y dígitos)</span>
+        </div>
+      </div>
+<!-- Prepended text-->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
+    <div class="col-md-5">
+        <div class="input-group">
+            <span class="input-group-addon">+52</span>
+            <input id="txtTelefono" name="txtTelefono" class="form-control" placeholder="#(444) 123 4567" type="text">
+        </div>
+    </div>
+</div>
+
+<!-- Appended Input -->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="txtCorreo">Correo electrónico</label>
+    <div class="col-md-6">
+        <div class="input-group">
+            <input id="txtCorreo" name="txtCorreo" class="form-control" placeholder="ejemplo" type="text" required="">
+            <span class="input-group-addon">@uplp.edu.mx</span>
+        </div>
+    </div>
+</div>
+<!-- Textarea -->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="txtMensaje">Mensaje</label>
+    <div class="col-md-4">
+        <textarea class="form-control" id="txtMensaje" name="txtMensaje">Escribe tu mensaje.</textarea>
+    </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="btnEnviar"></label>
+    <div class="col-md-4">
+        <input type="submit" id="btnEnviar" name="btnEnviar" class="btn btn-success">
+        <input type="reset" id="btnBorrar" name="btnBorrar" class="btn btn-danger">
+    </div>
+</div>
+</fieldset>
+</form>
+</body>
+</html>
