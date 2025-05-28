@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!--- Llenar el title y los metadatos-->
+    <title>Unidad 3 | Proyecto</title>
+    <link rel="icon" type="image/x-icon" href="../Imagenes/faviconT.ico">
+    <meta name="Autor" content="Beltran Almendarez Omar Osvaldo">
+    <meta name="Fecha" content="">
+    <meta name="Descripcion" content="Resumen">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <style>
+        body {
+            background-color: #000; /* Fondo negro para mejorar contraste */
+            color: white; /* Texto general blanco */
+        }
+        .shadow:hover {
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 20px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
+
+        .bd-mode-toggle .dropdown-menu .active .bi {
+            display: block !important;
+        }
+
+        table {
+            border: 1px solid #C5C5C5;
+            border-collapse: collapse;
+            width: 80%;         
+            height: 10px;       
+            margin: 0 auto;
+            color: white; 
+        }
+        table img {
+            height: 100%;        
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        table td:first-child {
+            font-family: "Big Shoulders", sans-serif;
+            font-weight: 200;
+            padding: 10px;
+            color: white;
+        }
+        tr:nth-child(even) { background-color: #444444; } 
+
+        table td:not(:first-child) {
+            font-family: "Lato", sans-serif;  
+            padding: 1rem;
+            color: white;
+        }
+        th, td {
+            width: 40%; 
+            padding: 10px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffd000;
+        }
+        nav.navbar.custom-bg {
+            background-color: #176d05 !important; 
+        }
+        .dropdown-menu {
+            background-color: #168200 !important;
+            border: black;
+        }
+        .dropdown-item {
+            color: #ffffff !important;
+        }
+        .dropdown-item:hover, 
+        .dropdown-item:focus {
+            color: #FFA500 !important;
+            background-color: transparent !important;
+        }
+
+        /* Estilos para la selección de personajes */
+        .selector-personajes {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 220px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .selector-personajes img {
+            height: 80px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            object-fit: contain;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        .selector-personajes:hover img:not(:hover) {
+            filter: blur(2.5px);
+        }
+        .selector-personajes img:hover {
+            transform: scale(1.1);
+            filter: none;
+            border-color: #4B0082;
+            box-shadow: 0 4px 12px rgba(75,0,130,0.7);
+            z-index: 10;
+            position: relative;
+            background: white;
+        }
+        .selector-personajes img.selected {
+            border-color: #ff8c00;
+            filter: none !important;
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(255,140,0,0.8);
+            position: relative;
+            z-index: 11;
+            background: white;
+        }
+        .detalle-personaje {
+            flex-grow: 1;
+            padding-left: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            overflow: hidden;
+        }
+        .detalle-personaje img {
+            height: 300px;
+            width: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            object-fit: contain;
+            flex-shrink: 0;
+            opacity: 1;
+            transform: translateX(0);
+            transition: none;
+        }
+        .detalle-texto {
+            flex-grow: 1;
+            opacity: 1;
+            transform: translateX(0);
+            transition: none;
+        }
+        .detalle-texto h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .detalle-texto p {
+            line-height: 1.6;
+            font-size: 1rem;
+            color: #ffffff;
+        }
+        .detalle-texto .juego {
+            font-weight: 600;
+            font-style: italic;
+            color: #a9d08e;
+            margin-top: 8px;
+        }
+
+        @keyframes fadeSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .fade-slide-in {
+            animation: fadeSlideIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body background="../Imagenes/fondo12.jpg">
+    <header data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-bg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="Proyecto.html">The Legend of Zelda</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item"><a class="nav-link" href="Resumen.html">Resumen</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Historia</a>
+                            <ul class="dropdown-menu" style="border-top: 5px solid white;">
+                                <li><a class="dropdown-item" href="./Cronologia.html">Cronologia</a></li>
+                                <li><a class="dropdown-item" href="./Empresa.html">Empresa</a></li>
+                                <li><a class="dropdown-item" href="./Videojuegos.html">Videojuegos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Soundtracks</a>
+                            <ul class="dropdown-menu" style="border-top: 5px solid white;">
+                                <li><a class="dropdown-item" href="TLOFZ_soundtrack.html">The Legend of Zelda</a></li>
+                                <li><a class="dropdown-item" href="TLOFZOT_soundtrack.html">The Legend of Zelda Ocarina of Time</a></li>
+                                <li><a class="dropdown-item" href="TLOFZMM_soundtrack.html">The Legend of Zelda Majoras Mask</a></li>
+                                <li><a class="dropdown-item" href="TLOFZTP_soundtrack.html">The Legend of Zelda Twillight Princess</a></li>
+                                <li><a class="dropdown-item" href="TLOFZBW_soundtrack.html">The Legend of Zelda Breath of the Wild</a></li>
+                                <li><a class="dropdown-item" href="TLOFZTK_soundtrack.html">The Legend of Zelda Tears of the Kingdom</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="Personajes.html">Personajes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Ventas.html">Ventas Globales</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Redes.html">Redes sociales</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5 pt-5" style="max-width: 1000px;">
+        <div class="d-flex">
+            <div class="selector-personajes" id="selector">
+                <!-- Personajes -->
+                <img src="../Imagenes/Link.jpg" alt="Link" data-nombre="Link"
+                    data-descripcion="Protagonista principal de la saga Zelda, valiente y habilidoso con la espada y arco."
+                    data-juego="The Legend of Zelda: Tears of the Kingdom" />
+                <img src="../Imagenes/ZeldaP.jpg" alt="Zelda" data-nombre="Zelda"
+                    data-descripcion="La princesa sabia y poderosa que protege el reino de Hyrule y la Trifuerza."
+                    data-juego="The Legend of Zelda: Breath of the Wild" />
+                <img src="../Imagenes/ganon.jpg" alt="Ganon" data-nombre="Ganon"
+                    data-descripcion="El villano principal de la saga, que busca conquistar Hyrule y apoderarse de la Trifuerza."
+                    data-juego="The Legend of Zelda: Breath of the Wild" />
+                <img src="../Imagenes/midna.jpg" alt="Midna" data-nombre="Midna"
+                    data-descripcion="Compañera en Twilight Princess, misteriosa aliada con poderes mágicos únicos."
+                    data-juego="The Legend of Zelda: Twilight Princess" />
+                <img src="../Imagenes/sheik.jpg" alt="Sheik" data-nombre="Sheik"
+                    data-descripcion="Alter ego de Zelda usado para evadir peligro y ayudar a Link con agilidad y destreza."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <img src="../Imagenes/darunia.jpg" alt="Darunia" data-nombre="Darunia"
+                    data-descripcion="Líder de los Goron y aliado fuerte y leal en la lucha contra las fuerzas del mal."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <img src="../Imagenes/tetra.png" alt="Tetra" data-nombre="Tetra"
+                    data-descripcion="Capitana de los piratas y una versión de Zelda en Wind Waker."
+                    data-juego="The Legend of Zelda: Wind Waker" />
+                <img src="../Imagenes/navi.jpg" alt="Navi" data-nombre="Navi"
+                    data-descripcion="El hada que guía a Link en Ocarina of Time."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <img src="../Imagenes/dark link.png" alt="Dark Link" data-nombre="Dark Link"
+                    data-descripcion="Una sombra de Link que aparece como un enemigo en varios juegos."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <img src="../Imagenes/ganonO.jpeg" alt="Ganondorf" data-nombre="Ganondorf"
+                    data-descripcion="El rey de los Gerudo y la forma humana de Ganon."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <!-- Enemigos adicionales -->
+                <img src="../Imagenes/like.jpg" alt="Like-Like" data-nombre="Like-Like"
+                    data-descripcion="Enemigo que intenta devorar el escudo del jugador."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <img src="../Imagenes/wall.jpg" alt="Wall Master" data-nombre="Wall Master"
+                    data-descripcion="Enemigo que ataca rápidamente tratando de agarrar a Link y devolverlo al inicio."
+                    data-juego="The Legend of Zelda: A Link to the Past" />
+                <img src="../Imagenes/redead.jpg" alt="ReDead" data-nombre="ReDead"
+                    data-descripcion="Criatura aterradora que paraliza a Link con su grito."
+                    data-juego="The Legend of Zelda: Ocarina of Time" />
+                <img src="../Imagenes/goriya.png" alt="Goriya" data-nombre="Goriya"
+                    data-descripcion="Enemigo que lanza boomerangs para atacar."
+                    data-juego="The Legend of Zelda: A Link to the Past" />
+            </div>
+            <div class="detalle-personaje" id="detalle">
+                <img src="../Imagenes/Link.jpg" alt="Personaje Seleccionado" id="img-detalle" />
+                <div class="detalle-texto">
+                    <h2 id="nombre-detalle">Link</h2>
+                    <p id="desc-detalle">Protagonista principal de la saga Zelda, valiente y habilidoso con la espada y arco.</p>
+                    <p class="juego" id="juego-detalle">The Legend of Zelda: Ocarina of Time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
+    <script>
+        const selector = document.getElementById('selector');
+        const imagenDetalle = document.getElementById('img-detalle');
+        const nombreDetalle = document.getElementById('nombre-detalle');
+        const descDetalle = document.getElementById('desc-detalle');
+        const juegoDetalle = document.getElementById('juego-detalle');
+        const detalle = document.getElementById('detalle');
+
+        // Inicializar el primer personaje seleccionado
+        const imgs = selector.querySelectorAll('img');
+        imgs[0].classList.add('selected');
+
+        selector.addEventListener('click', (e) => {
+            if (e.target.tagName.toLowerCase() !== 'img') return;
+
+            // Quitar clase selected de todas
+            imgs.forEach(img => img.classList.remove('selected'));
+
+            // Añadir clase selected a la imagen clickeada
+            const seleccionado = e.target;
+            seleccionado.classList.add('selected');
+
+            // Función para animar y actualizar contenido con retraso
+            function actualizarDetalle() {
+                // Remover clase animación si está
+                imagenDetalle.classList.remove('fade-slide-in');
+                detalle.querySelector('.detalle-texto').classList.remove('fade-slide-in');
+
+                // Forzar reflujo para reiniciar animación
+                void imagenDetalle.offsetWidth;
+                void detalle.querySelector('.detalle-texto').offsetWidth;
+
+                // Actualizar contenido
+                imagenDetalle.src = seleccionado.src;
+                imagenDetalle.alt = seleccionado.alt;
+                nombreDetalle.textContent = seleccionado.dataset.nombre;
+                descDetalle.textContent = seleccionado.dataset.descripcion;
+                juegoDetalle.textContent = seleccionado.dataset.juego;
+
+                // Agregar clase para animar entrada
+                imagenDetalle.classList.add('fade-slide-in');
+                detalle.querySelector('.detalle-texto').classList.add('fade-slide-in');
+            }
+
+            actualizarDetalle();
+        });
+    </script>
+</body>
+</html>
+
