@@ -1,0 +1,530 @@
+h1 {
+      text-align: center;
+      color: #4CAF50;
+      margin-bottom: 1rem;
+      user-select: none;
+    }
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+      transition: filter 0.3s ease;
+    }
+    /* Línea vertical central */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: #4CAF50;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+      pointer-events: none;
+    }
+    /* Contenedor de eventos */
+    .container-timeline {
+      padding: 1rem 2rem;
+      position: relative;
+      width: 50%;
+      cursor: pointer;
+    }
+    /* Eventos a la izquierda */
+    .left {
+      left: 0;
+    }
+    /* Eventos a la derecha */
+    .right {
+      left: 50%;
+    }
+    /* Cuadro que contiene info de cada juego */
+    .content {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      user-select: none;
+      transition: text-shadow 0.3s ease 0.3s; /* Añadido delay de 0.3s */
+    }
+    /* Iluminar texto al pasar cursor con delay */
+    .content:hover h2 {
+      text-shadow: 0 0 5px #53ff04;
+      transition-delay: 0.3s;
+    }
+    /* Flecha que señala la línea */
+    .left .content::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      right: -15px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent transparent #333;
+      pointer-events: none;
+    }
+    .right .content::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: -15px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent #333 transparent transparent;
+      pointer-events: none;
+    }
+    /* Título del juego */
+    .content h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+      color: #ffffff;
+      user-select: text;
+      transition: text-shadow 0.3s ease 0.3s; /* también delay aquí */
+    }
+    /* Año al lado del título */
+    .year {
+      font-size: 0.9rem;
+      color: #ffffff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Modal overlay */
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Mostrar modal con animacion */
+    #modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+   
+    /* Modal content box */
+    #modal-content {
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.9);
+      color: #fff;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+      user-select: text;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInScale 0.3s ease;
+    }
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity:1;
+        transform: scale(1);
+      }
+    }
+    /* Imagen en modal */
+    #modal-content img {
+      max-width: 100%;
+      max-height: 60vh;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      object-fit: contain;
+      box-shadow: 0 0 20px rgba(76,175,80,0.7);
+    }
+    /* Texto en modal */
+    #modal-content p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin: 0 0 1rem 0;
+    }
+    #modal-content .year-detail {
+      font-style: italic;
+      color: #90ee90;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    /* Botón cerrar */
+    #modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    #modal-close:hover {
+      color: #38b100;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 20px;
+      }
+      .container-timeline {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 25px;
+        margin-bottom: 1.5rem;
+        left: 0 !important;
+      }
+      .left .content::before,
+      .right .content::before {
+        left: 15px;
+        border-color: transparent #333 transparent transparent;
+        right: auto;
+        top: 20px;
+      }
+    }
+    body {
+  background-image: url("../ImagenesP/fondo12.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.shadow:hover {
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.b-example-divider {
+  width: 100%;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, .1);
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;
+  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.b-example-vr {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 100vh;
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+
+p, h2 {
+  color: white;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #fff;
+  cursor: pointer;
+  text-shadow:
+    0 0 10px rgb(255, 255, 255),
+    0 0 20px rgb(255, 255, 255),
+    0 0 40px rgb(255, 255, 255),
+    0 0 80px rgb(255, 255, 255);
+  transition: text-shadow 0.3s ease;
+}
+
+nav.navbar.custom-bg {
+  background-color: #239c05 !important;
+  background: solid;
+}
+
+.dropdown-menu {
+  background-color: #239c05 !important;
+  border: black;
+}
+
+.dropdown-item {
+  color: #ffffff !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: #fff;
+  cursor: pointer;
+  text-shadow:
+    0 0 10px rgb(255, 255, 255),
+    0 0 20px rgb(255, 255, 255),
+    0 0 40px rgb(255, 255, 255),
+    0 0 80px rgb(255, 255, 255);
+  transition: text-shadow 0.3s ease;
+}
+
+.light-text {
+  color: #fff;
+  cursor: pointer;
+  transition: text-shadow 0.3s ease;
+}
+
+.light-text:hover {
+  text-shadow:
+    0 0 10px #0ff,
+    0 0 20px #0ff,
+    0 0 40px #0ff,
+    0 0 80px #0ff;
+}
+/* Crono.css */
+
+/* Estilos generales de la línea del tiempo (ajusta según tu diseño actual) */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.container-timeline {
+    padding: 10px 0; /* Ajusta el padding para los elementos individuales */
+    position: relative;
+    width: 50%;
+    /* Puedes ajustar el margen o el width para centrar si es necesario */
+}
+
+.container-timeline.left {
+    left: 0;
+}
+
+.container-timeline.right {
+    left: 50%; /* Esto es para la línea del tiempo "normal" */
+}
+
+/* *** ESTOS SON LOS ESTILOS CLAVE PARA EL COLOR Y LA ILUMINACIÓN DE LOS CUADROS *** */
+.container-timeline .content {
+    padding: 20px 30px;
+    background-color: #6a6d70; /* Un blanco grisáceo claro, típico de Bootstrap. Si era otro color, cámbialo aquí. */
+    position: relative;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra inicial */
+    transition: all 0.3s ease; /* Transición suave para el efecto hover */
+    cursor: pointer; /* Indica que es interactivo */
+}
+
+.container-timeline .content:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el mouse */
+    transform: translateY(-5px); /* Pequeño levantamiento al pasar el mouse */
+    background-color: #0a0a0a; /* Ligeramente más oscuro o un color de resaltado al pasar el mouse */
+}
+/* ******************************************************************************** */
+.timeline-branch-container::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Controla la altura de esta línea horizontal */
+    left: 10%; /* Ajusta el inicio (puedes usar px también) */
+    width: 80%; /* Ajusta el ancho para que cubra tus 3 ramas */
+    height: 4px; /* Grosor */
+    background-color: #6c757d;
+    z-index: 1;
+}
+
+/* Línea vertical principal (antes de la ramificación y después de la convergencia) */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #adb5bd; /* Un gris neutro. Puedes usar #f1f1f1 si era un gris más claro */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    z-index: -1; /* Para que la línea esté detrás del contenido */
+}
+
+/* Estilos para el contenedor de las ramas */
+.timeline-branch-container {
+    display: flex; /* Para que las ramas se coloquen una al lado de la otra */
+    justify-content: space-around; /* Distribuye las ramas equitativamente */
+    align-items: flex-start; /* Alinea las ramas desde la parte superior */
+    padding: 50px 0; /* Espacio entre el Ocarina of Time y el inicio de las ramas */
+    position: relative;
+    margin-top: 50px; /* Separación de Ocarina of Time */
+    margin-bottom: 50px; /* Separación de la convergencia */
+}
+
+/* Estilos para cada rama individual */
+.timeline-path {
+    flex: 1; /* Para que cada rama ocupe un espacio similar */
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Para que los elementos dentro de la rama estén en columna */
+    align-items: center; /* Centra los elementos dentro de cada rama */
+    /* Añadir un color de fondo sutil para las ramas si se desea destacarlas */
+    /* background-color: rgba(240, 240, 240, 0.5); */
+    /* border-radius: 10px; */
+    /* padding-top: 20px; */
+}
+
+.timeline-path h3 {
+    margin-bottom: 30px;
+    color: #495057; /* Color de texto para los títulos de las ramas */
+    font-size: 1.5em;
+    border-bottom: 2px solid #ced4da; /* Color de la línea bajo el título de la rama */
+    padding-bottom: 10px;
+}
+
+/* Ajustes para los containers dentro de las ramas */
+.timeline-path .container-timeline {
+    width: 100%; /* Cada elemento ocupa todo el ancho de su rama */
+    position: relative;
+    left: auto; /* Deshacer el posicionamiento left/right de la línea principal */
+    right: auto;
+    margin-bottom: 40px; /* Espacio entre elementos dentro de una rama */
+}
+
+/* Líneas verticales dentro de cada rama */
+.timeline-path::before {
+    content: '';
+    position: absolute;
+    width: 4px; /* Ancho de la línea vertical de la rama */
+    background-color: #6c757d; /* Color de la línea de la rama, un gris más oscuro */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+/* Conectores horizontales y verticales para las ramas (Conceptual) */
+/* Estas líneas que salen de Ocarina of Time hacia las ramas
+   y las que convergen hacia Breath of the Wild son las más difíciles
+   de lograr con CSS puro para una apariencia de mapa conceptual limpia.
+   Considera usar SVG o librerías si necesitas formas complejas. */
+/* Ejemplo muy simplificado de líneas de conexión: */
+/* Puedes jugar con ::before y ::after en .timeline-branch-container
+   y .timeline-merge para dibujar líneas de conexión */
+
+/* Estilos para la convergencia */
+.timeline-merge {
+    position: relative;
+    margin-top: 50px; /* Espacio entre las ramas y la convergencia */
+    padding-top: 50px; /* Espacio para las líneas que convergen */
+    text-align: center;
+}
+
+/* Línea vertical central después de la convergencia */
+.timeline-merge::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #adb5bd; /* Mismo color que la línea principal */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    z-index: -1;
+}
+
+/* Ajustes para los elementos de la convergencia */
+.timeline-merge .container-timeline {
+    width: 50%; /* Vuelve a usar el ancho de la línea principal */
+    left: 50%; /* Centra los elementos */
+    transform: translateX(-50%); /* Ajusta el centrado */
+    margin-bottom: 40px; /* Espacio entre Breath of the Wild y Tears of the Kingdom */
+}
+
+/* Media queries para responsividad */
+@media screen and (max-width: 768px) {
+    .timeline::after {
+        left: 31px; /* Ajusta la línea principal para pantallas pequeñas */
+    }
+
+    .container-timeline {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+        left: 0; /* Alinea todo a la izquierda */
+    }
+
+    .container-timeline.right {
+        left: 0; /* También alinea los "right" a la izquierda en móvil */
+    }
+
+    .timeline-path {
+        width: 100%;
+        margin-bottom: 30px; /* Espacio entre ramas en vista móvil */
+        padding: 0 10px; /* Reducir padding en móvil */
+    }
+
+    .timeline-branch-container {
+        flex-direction: column; /* Las ramas se apilan verticalmente en móvil */
+        align-items: center;
+    }
+
+    .timeline-path::before {
+        left: 31px; /* Ajusta la línea vertical de la rama en móvil */
+    }
+}
+.timeline-merge::before {
+    content: '';
+    position: absolute;
+    /* Ubicación: top: 0 del timeline-merge. Esto lo coloca al final de las ramas. */
+    top: 0;
+    left: 10%; /* Ajusta el inicio para que abarque las ramas */
+    width: 80%; /* Ajusta el ancho para que abarque las ramas */
+    height: 4px; /* Grosor de la línea */
+    background-color: #6c757d; /* Color de la línea de conexión */
+    z-index: 1; /* Asegura que esté por encima de la línea principal */
+}
